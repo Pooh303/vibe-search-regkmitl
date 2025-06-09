@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Filter Tool</title>
+    <style>
+        *{
+            font-family: "Prompt", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        body {
+            font-family: "Prompt", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 25px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 750px;
+            text-align: left;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 16px;
+            color: #555;
+        }
+        code {
+            background-color: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+            color: #c0392b;
+        }
+        .key-combo {
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+            box-shadow: 1px 1px 1px #ccc;
+        }
+        .script-input-section {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px dashed #3498db;
+            border-radius: 8px;
+            background-color: #ecf0f1;
+        }
+        .script-input-section label {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        #customScriptArea {
+            width: calc(100% - 22px);
+            min-height: 100px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 1em;
+            font-family: 'Courier New', Courier, monospace;
+            box-sizing: border-box;
+            resize: none;
+        }
+        #copyUserScriptButton {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            display: block;
+            margin: 0 auto;
+            min-width: 200px;
+        }
+        #copyUserScriptButton:hover {
+            background-color: #bec02b;
+        }
+        #copyUserScriptButton:active {
+            transform: scale(0.98);
+        }
+        .copy-feedback {
+            text-align:center;
+            color: green;
+            font-weight: bold;
+            min-height: 20px;
+            margin-top: 10px;
+        }
+        .note {
+            background-color: #fff9c4;
+            border-left: 5px solid #fdd835;
+            padding: 10px 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+        ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        #areaLabel{
+            font-size: medium;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>🛠️ Subject Filter Tool 🛠️</h1>
+
+        <div class="script-input-section">
+            <label for="customScriptArea" id="areaLabel">เครื่องมือนี้ช่วยค้นหาและกรองรายวิชาในตาราง ด้วยคำค้น เช่น รหัสวิชา ชื่อวิชา วัน เวลา อาจารย์ หรือห้องเรียน
+                เพียงคัดลอกโค้ดไปวางใน Console ของเบราว์เซอร์ ก็พร้อมใช้งานทันที !</label>
+            <textarea id="customScriptArea" readonly placeholder="">function _0xd92b(_0x4e6a45,_0x2bb883){const _0x2a3077=_0x2a30();return _0xd92b=function(_0xd92b0e,_0x389053){_0xd92b0e=_0xd92b0e-0x6b;let _0x54743e=_0x2a3077[_0xd92b0e];return _0x54743e;},_0xd92b(_0x4e6a45,_0x2bb883);}(function(_0x473ba9,_0x5d05ee){const _0x23ca05=_0xd92b,_0x42ed4b=_0x473ba9();while(!![]){try{const _0x42244f=parseInt(_0x23ca05(0x8c))/0x1*(parseInt(_0x23ca05(0x72))/0x2)+-parseInt(_0x23ca05(0x96))/0x3+-parseInt(_0x23ca05(0x75))/0x4*(-parseInt(_0x23ca05(0xa3))/0x5)+-parseInt(_0x23ca05(0x7c))/0x6*(-parseInt(_0x23ca05(0x93))/0x7)+parseInt(_0x23ca05(0x73))/0x8+-parseInt(_0x23ca05(0x87))/0x9*(-parseInt(_0x23ca05(0x81))/0xa)+-parseInt(_0x23ca05(0x8e))/0xb*(parseInt(_0x23ca05(0xa2))/0xc);if(_0x42244f===_0x5d05ee)break;else _0x42ed4b['push'](_0x42ed4b['shift']());}catch(_0x5f1356){_0x42ed4b['push'](_0x42ed4b['shift']());}}}(_0x2a30,0xa71d4),(function(){const _0x2c5097=_0xd92b,_0x49a778=document[_0x2c5097(0x92)](_0x2c5097(0x85)),_0x435bfe=_0x2c5097(0xae),_0x27e8bc='10px',_0xeb032b='5px\x208px';_0x49a778[_0x2c5097(0xab)]['cssText']=_0x2c5097(0x78)+_0x435bfe+';border:1px\x20solid\x20#ddd;border-radius:8px;z-index:1000;box-shadow:0\x202px\x2010px\x20rgba(0,0,0,0.1);display:flex;flex-direction:column;gap:'+_0x27e8bc+';min-width:380px;';const _0x25be3f=document['createElement'](_0x2c5097(0xaa));_0x25be3f[_0x2c5097(0x8b)]='text',_0x25be3f['id']=_0x2c5097(0x9c),_0x25be3f['placeholder']=_0x2c5097(0x84),_0x25be3f[_0x2c5097(0xab)][_0x2c5097(0x9b)]='width:100%;padding:8px;border:1px\x20solid\x20#ccc;border-radius:4px;box-sizing:\x20border-box;';const _0x2a7479=document[_0x2c5097(0x92)]('div');_0x2a7479[_0x2c5097(0xab)][_0x2c5097(0x9b)]=_0x2c5097(0x9f);const _0x3f63e6='<select\x20id=\x22consoleDayFilter\x22\x20style=\x22flex:1;min-width:90px;padding:8px;border:1px\x20solid\x20#ccc;border-radius:4px;\x22><option\x20value=\x22\x22>ทุกวัน</option><option\x20value=\x22จ.\x22>จ.</option><option\x20value=\x22อ.\x22>อ.</option><option\x20value=\x22พ.\x22>พ.</option><option\x20value=\x22พฤ.\x22>พฤ.</option><option\x20value=\x22ศ.\x22>ศ.</option><option\x20value=\x22ส.\x22>ส.</option><option\x20value=\x22อา.\x22>อา.</option></select>',_0x2d242c=_0x2c5097(0x76),_0x443515=_0x2c5097(0x79);_0x2a7479[_0x2c5097(0x7f)]=_0x3f63e6+_0x2d242c+_0x443515;const _0x51005a=document[_0x2c5097(0x92)](_0x2c5097(0xa5));_0x51005a[_0x2c5097(0xab)][_0x2c5097(0x9b)]=_0x2c5097(0x77),_0x51005a[_0x2c5097(0x7f)]='<input\x20type=\x22checkbox\x22\x20id=\x22filterByCapacity\x22><span>แสดงเฉพาะวิชาที่ว่าง\x20(รับ\x20>\x20ลงล่วงหน้า\x20+\x20ลง)</span>';const _0x3a291a=document['createElement']('button');_0x3a291a['id']=_0x2c5097(0x6f),_0x3a291a[_0x2c5097(0x7f)]=_0x2c5097(0xa0),_0x3a291a[_0x2c5097(0x89)]=_0x2c5097(0x6d),_0x3a291a[_0x2c5097(0xab)][_0x2c5097(0x9b)]=_0x2c5097(0x9e),_0x49a778['appendChild'](_0x25be3f),_0x49a778[_0x2c5097(0xa1)](_0x2a7479),_0x49a778['appendChild'](_0x51005a),_0x49a778[_0x2c5097(0xa1)](_0x3a291a),document[_0x2c5097(0x80)]['prepend'](_0x49a778);const _0x402934=document[_0x2c5097(0x8f)]('consoleSubjectSearch'),_0x2c26f0=document['getElementById'](_0x2c5097(0x83)),_0x5d248f=document[_0x2c5097(0x8f)]('consoleTimeStart'),_0x578eb7=document['getElementById'](_0x2c5097(0xa6)),_0x4cdc5d=document['getElementById'](_0x2c5097(0x9d)),_0x1fd811=document['querySelectorAll'](_0x2c5097(0xa7)),_0x1cddb7=[_0x25be3f,_0x2a7479,_0x51005a];let _0x3e3c29=!0x1;_0x3a291a[_0x2c5097(0x86)]('click',()=>{const _0x1ef1de=_0x2c5097;_0x3e3c29=!_0x3e3c29,_0x1cddb7[_0x1ef1de(0x7b)](_0x13d298=>{const _0x2ffc98=_0x1ef1de;_0x3e3c29?_0x13d298['style']['display']='none':_0x13d298===_0x2a7479||_0x13d298===_0x51005a?_0x13d298['style']['display']=_0x2ffc98(0x82):_0x13d298[_0x2ffc98(0xab)]['display']='';}),_0x3e3c29?(_0x3a291a[_0x1ef1de(0x7f)]=_0x1ef1de(0xac),_0x49a778[_0x1ef1de(0xab)][_0x1ef1de(0x7d)]=_0x1ef1de(0x98),_0x49a778[_0x1ef1de(0xab)]['padding']=_0xeb032b):(_0x3a291a[_0x1ef1de(0x7f)]=_0x1ef1de(0xa0),_0x49a778[_0x1ef1de(0xab)][_0x1ef1de(0x7d)]=_0x27e8bc,_0x49a778[_0x1ef1de(0xab)][_0x1ef1de(0x6c)]=_0x435bfe);}),_0x3a291a['addEventListener']('mouseenter',()=>_0x3a291a[_0x2c5097(0xab)]['opacity']='1'),_0x3a291a['addEventListener'](_0x2c5097(0x74),()=>_0x3a291a[_0x2c5097(0xab)][_0x2c5097(0x94)]=_0x2c5097(0x99));function _0x4695a2(_0x169393){const _0x524a7d=_0x2c5097;if(!_0x169393||!/^\d{2}:\d{2}$/[_0x524a7d(0x6b)](_0x169393))return null;const [_0x48b60e,_0x396b1f]=_0x169393[_0x524a7d(0x97)](':')[_0x524a7d(0x71)](Number);if(isNaN(_0x48b60e)||isNaN(_0x396b1f)||_0x48b60e<0x0||_0x48b60e>0x17||_0x396b1f<0x0||_0x396b1f>0x3b)return null;return _0x48b60e*0x3c+_0x396b1f;}function _0x49faad(){const _0x390bc3=_0x2c5097,_0x4aaf08=_0x402934[_0x390bc3(0x70)]['toLowerCase'](),_0x457cb1=_0x2c26f0[_0x390bc3(0x70)][_0x390bc3(0xad)](),_0x3a277f=_0x5d248f[_0x390bc3(0x70)],_0x251463=_0x578eb7['value'],_0x4b79a6=_0x4695a2(_0x3a277f),_0x15e643=_0x4695a2(_0x251463),_0xccef0=_0x4cdc5d[_0x390bc3(0xa4)];_0x1fd811['forEach'](_0x5e8550=>{const _0x392e09=_0x390bc3,_0x25596c=_0x5e8550[_0x392e09(0x8d)](_0x392e09(0x6e));_0x25596c['forEach'](_0x479326=>{const _0x41db54=_0x392e09;if(_0x479326[_0x41db54(0x7a)][_0x41db54(0x95)]<0xf){_0x479326[_0x41db54(0xab)][_0x41db54(0x9a)]=_0x41db54(0xa9);return;}const _0x36fea7=_0x479326['children'][0x0]?_0x479326[_0x41db54(0x7a)][0x0][_0x41db54(0x7e)][_0x41db54(0xa8)]()[_0x41db54(0xad)]():'',_0x420762=_0x479326[_0x41db54(0x7a)][0x1]?_0x479326[_0x41db54(0x7a)][0x1]['innerText'][_0x41db54(0xa8)]()['toLowerCase']():'',_0x3cab70=_0x479326[_0x41db54(0x7a)][0x2]?_0x479326['children'][0x2][_0x41db54(0x7e)][_0x41db54(0xa8)]()[_0x41db54(0xad)]():'',_0x37dc37=_0x479326[_0x41db54(0x7a)][0x4]?_0x479326['children'][0x4][_0x41db54(0x7e)][_0x41db54(0xa8)]():'',_0x448b05=_0x37dc37[_0x41db54(0xad)](),_0x311506=_0x479326[_0x41db54(0x7a)][0x5]?_0x479326[_0x41db54(0x7a)][0x5]['innerText']['trim']()[_0x41db54(0xad)]():'',_0x530d1b=_0x479326[_0x41db54(0x7a)][0x6]?_0x479326['children'][0x6][_0x41db54(0x7e)]['trim']()[_0x41db54(0xad)]():'',_0xd3e7c7=_0x479326[_0x41db54(0x7a)][0x7]?_0x479326[_0x41db54(0x7a)][0x7]['innerText'][_0x41db54(0xa8)]()['toLowerCase']():'',_0x33cc76=_0x479326[_0x41db54(0x7a)][0x9]?_0x479326['children'][0x9]['innerText'][_0x41db54(0xa8)]()[_0x41db54(0xad)]():'',_0x129bf7=_0x479326[_0x41db54(0x7a)][0xa]?_0x479326['children'][0xa][_0x41db54(0x7e)][_0x41db54(0xa8)]()[_0x41db54(0xad)]():'',_0x5ccb82=_0x479326[_0x41db54(0x7a)][0xb]?parseInt(_0x479326[_0x41db54(0x7a)][0xb][_0x41db54(0x7e)]['trim']()):0x0,_0x5cb99b=_0x479326[_0x41db54(0x7a)][0xc]?parseInt(_0x479326[_0x41db54(0x7a)][0xc]['innerText']['trim']()):0x0,_0x15579d=_0x479326[_0x41db54(0x7a)][0xe]?parseInt(_0x479326[_0x41db54(0x7a)][0xe][_0x41db54(0x7e)][_0x41db54(0xa8)]()):0x0;let _0x679f3=!0x0;if(_0xccef0)_0x679f3=_0x5cb99b+_0x15579d<_0x5ccb82;const _0x52a0e5=_0x36fea7['includes'](_0x4aaf08)||_0x420762[_0x41db54(0x91)](_0x4aaf08)||_0x3cab70[_0x41db54(0x91)](_0x4aaf08)||_0x311506['includes'](_0x4aaf08)||_0x530d1b[_0x41db54(0x91)](_0x4aaf08)||_0xd3e7c7['includes'](_0x4aaf08)||_0x33cc76[_0x41db54(0x91)](_0x4aaf08)||_0x129bf7['includes'](_0x4aaf08);let _0xecf52=!0x0;if(_0x457cb1&&!_0x448b05[_0x41db54(0x90)](_0x457cb1))_0xecf52=!0x1;let _0x1f92d4=!0x0;if(_0x4b79a6!==null||_0x15e643!==null){const _0x2df80e=_0x37dc37[_0x41db54(0x88)](/(\d{2}:\d{2})-(\d{2}:\d{2})/);if(_0x2df80e&&_0x2df80e[_0x41db54(0x95)]===0x3){const _0x28683c=_0x4695a2(_0x2df80e[0x1]),_0xf550ce=_0x4695a2(_0x2df80e[0x2]);if(_0x28683c!==null&&_0xf550ce!==null){if(_0x4b79a6!==null&&_0x28683c<_0x4b79a6)_0x1f92d4=!0x1;if(_0x1f92d4&&_0x15e643!==null&&_0xf550ce>_0x15e643)_0x1f92d4=!0x1;}else _0x1f92d4=!0x1;}else _0x1f92d4=!0x1;}if(_0x52a0e5&&_0xecf52&&_0x1f92d4&&_0x679f3)_0x479326[_0x41db54(0xab)]['display']='';else _0x479326['style'][_0x41db54(0x9a)]=_0x41db54(0xa9);});});}_0x402934[_0x2c5097(0x86)](_0x2c5097(0xaa),_0x49faad),_0x2c26f0['addEventListener'](_0x2c5097(0x8a),_0x49faad),_0x5d248f[_0x2c5097(0x86)]('input',_0x49faad),_0x578eb7[_0x2c5097(0x86)]('input',_0x49faad),_0x4cdc5d[_0x2c5097(0x86)](_0x2c5097(0x8a),_0x49faad);}()));function _0x2a30(){const _0x33ede8=['11592AhgGBT','opacity','length','2357577IwcNcY','split','0px','0.7','display','cssText','consoleSubjectSearch','filterByCapacity','align-self:flex-end;\x20padding:\x202px\x205px;\x20font-size:16px;\x20cursor:pointer;\x20background-color:\x20transparent;\x20border:\x20none;\x20line-height:1;\x20margin-top:\x20auto;\x20opacity:\x200.7;','display:flex;gap:10px;flex-wrap:\x20wrap;','ซ่อน','appendChild','168gVKVKD','1555avuftu','checked','label','consoleTimeEnd','.v-data-table__wrapper\x20table','trim','none','input','style','แสดง','toLowerCase','15px','test','padding','ซ่อน/แสดง\x20Filter','tbody\x20tr','consoleCollapseButton','value','map','2Cvxgeb','1548184CcAxjt','mouseleave','1164HpCVPv','<input\x20type=\x22text\x22\x20id=\x22consoleTimeStart\x22\x20placeholder=\x22เริ่ม\x20(HH:MM)\x22\x20style=\x22flex:1;min-width:100px;padding:8px;border:1px\x20solid\x20#ccc;border-radius:4px;\x22>','display:flex;align-items:center;gap:5px;','position:fixed;top:10px;left:50%;transform:translateX(-50%);background-color:white;padding:','<input\x20type=\x22text\x22\x20id=\x22consoleTimeEnd\x22\x20placeholder=\x22สิ้นสุด\x20(HH:MM)\x22\x20style=\x22flex:1;min-width:100px;padding:8px;border:1px\x20solid\x20#ccc;border-radius:4px;\x22>','children','forEach','3942mOAZYe','gap','innerText','innerHTML','body','170LYSmhJ','flex','consoleDayFilter','ค้นหาวิชา\x20(รหัส,\x20ชื่อ,\x20อาจารย์,\x20ห้องเรียน,\x20ตึก,\x20เงื่อนไข,\x20หมายเหตุ)','div','addEventListener','485613wXevEU','match','title','change','type','347708KuRcpw','querySelectorAll','916641NvtJma','getElementById','startsWith','includes','createElement'];_0x2a30=function(){return _0x33ede8;};return _0x2a30();}</textarea>
+            <button id="copyUserScriptButton" onclick="copyUserScript()">คัดลอก</button>
+            <p id="copyFeedback" class="copy-feedback"></p>
+        </div>
+
+        <h2>ขั้นตอนการใช้งาน:</h2>
+        <ol>
+            <li>
+                <strong>เปิดหน้าเว็บไซต์เป้าหมาย:</strong>
+                เปิดหน้าเว็บไซต์ที่คุณต้องการทดสอบหรือรัน JavaScript ในเบราว์เซอร์ของคุณ (เช่น Google Chrome, Firefox, Microsoft Edge)
+            </li>
+            <li>
+                <strong>เปิด Developer Tools:</strong>
+                กดปุ่ม <span class="key-combo">F12</span> บนคีย์บอร์ด
+                <br>หรือ คลิกขวาบนหน้าเว็บแล้วเลือก <strong>"Inspect"</strong> (ตรวจสอบ) หรือ <strong>"Inspect Element"</strong> (ตรวจสอบองค์ประกอบ)
+            </li>
+            <li>
+                <strong>ไปที่แท็บ Console:</strong>
+                ในหน้าต่าง Developer Tools ที่เปิดขึ้นมา, มองหาและคลิกที่แท็บชื่อว่า <strong>"Console"</strong>
+                <img src="console.png" alt="Browser Console Tab" style="max-width:100%; border:1px solid #ddd; margin-top:10px; border-radius: 4px;">
+                <br><small>(ภาพตัวอย่างตำแหน่งแท็บ Console)</small>
+            </li>
+            <li>
+                <strong>เตรียมวาง Script:</strong>
+                คุณจะเห็นเครื่องหมาย prompt (เช่น <code>></code> หรือ <code>>></code>) แสดงว่า Console พร้อมรับคำสั่ง คลิกที่บริเวณนั้นเพื่อให้ cursor กระพริบ
+            </li>
+            <li>
+                <strong>วาง (Paste) หรือพิมพ์ Script:</strong>
+                <ul>
+                    <li><strong>หากคุณคัดลอก Script มา:</strong> กด <span class="key-combo">Ctrl+V</span> (สำหรับ Windows/Linux) หรือ <span class="key-combo">Cmd+V</span> (สำหรับ macOS) เพื่อวางโค้ด JavaScript ที่คุณต้องการรัน</li>
+                </ul>
+                <img src="pastehere.png" alt="Paste Script Here" style="max-width:100%; border:1px solid #ddd; margin-top:10px; border-radius: 4px;">
+                <br><small>(ภาพตัวอย่างตำแหน่งวาง Script)</small>
+            </li>
+            <li>
+                <strong>สั่งรัน Script:</strong>
+                กดปุ่ม <span class="key-combo">Enter</span> บนคีย์บอร์ด
+            </li>
+            <li>
+                <strong>ดูผลลัพธ์:</strong>
+                Script ของคุณจะถูกรันบนหน้าเว็บนั้นๆ ผลลัพธ์
+            </li>
+        </ol>
+
+        <h2>ข้อควรจำ:</h2>
+        <ul>
+            <li><strong>ขอบเขตการทำงาน (Scope):</strong> Script ที่รันใน Console จะทำงานใน context ของหน้าเว็บที่เปิดอยู่ ณ ขณะนั้นเท่านั้น และสามารถเข้าถึง DOM และตัวแปร JavaScript ทั้งหมดของหน้านั้นได้</li>
+            <li><strong>ไม่ถาวร:</strong> Script ที่คุณรันใน Console จะหายไปเมื่อคุณโหลดหน้าเว็บใหม่ (refresh) หรือไปยังหน้าอื่น หากต้องการให้ Script ทำงานถาวร ควรใช้เป็น User Script ผ่าน Extension (เช่น Tampermonkey, Greasemonkey) หรือพัฒนาเป็น Browser Extension โดยตรง</li>
+        </ul>
+
+    </div>
+    <footer>
+        <p>Project "Vibe-Search-reg.kmitl" developed by: <a href="https://github.com/Pooh303" target="_blank">Pooh303</a></p>
+    </footer>
+
+    <script>
+        function copyUserScript() {
+            const scriptArea = document.getElementById('customScriptArea');
+            const copyButton = document.getElementById('copyUserScriptButton');
+            const feedbackElement = document.getElementById('copyFeedback');
+
+            if (!scriptArea.value.trim()) {
+                feedbackElement.textContent = 'ไม่มี Script ให้คัดลอก กรุณาพิมพ์หรือวาง Script ก่อน';
+                feedbackElement.style.color = 'red';
+                 setTimeout(() => {
+                    feedbackElement.textContent = '';
+                }, 3000);
+                return;
+            }
+
+            scriptArea.select();
+            scriptArea.setSelectionRange(0, 99999); // For mobile devices
+
+            try {
+                document.execCommand('copy');
+                feedbackElement.textContent = 'คัดลอก Script จากช่องด้านบนแล้ว!';
+                feedbackElement.style.color = 'green';
+                copyButton.textContent = 'คัดลอกเรียบร้อย';
+                copyButton.style.backgroundColor = '#27ae60'; // Green color
+
+                setTimeout(() => {
+                    copyButton.textContent = 'คัดลอก';
+                    copyButton.style.backgroundColor = '#e74c3c';
+                    feedbackElement.textContent = '';
+                }, 2500);
+            } catch (err) {
+                feedbackElement.textContent = 'ไม่สามารถคัดลอกได้ โปรดคัดลอกด้วยตนเอง';
+                feedbackElement.style.color = 'red';
+                console.error('Failed to copy: ', err);
+            }
+
+            // Deselect the text
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            } else if (document.selection) {
+                document.selection.empty();
+            }
+        }
+    </script>
+</body>
+</html>
